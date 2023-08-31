@@ -11,16 +11,17 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 
 @login_required(login_url="login")
 def NewConversation(request, pk):
-    from_user = request.user
-    to_user = get_object_or_404(CustomUser, id=pk)
-    body = "Started a new conversation"
-    if from_user != to_user:
-        try:
-            Message.objects.create(
-                user=from_user, sender=from_user, recipient=to_user, body=body)
-        except:
-            pass
-        return redirect("message_inbox")
+    if request.user.profile.id:
+        from_user = request.user
+        to_user = get_object_or_404(CustomUser, id=pk)
+        body = "Started a new conversation"
+        if from_user != to_user:
+            try:
+                Message.objects.create(
+                    user=from_user, sender=from_user, recipient=to_user, body=body)
+            except:
+                pass
+            return redirect("message_inbox")
 
 
 @login_required(login_url="login")
@@ -35,6 +36,7 @@ def Message_inbox(request):
     return render(request, "messages/message_inbox.html", context)
 
 
+@login_required(login_url="login")
 def SendMessages(request):
     from_user = request.user
     to_user_id = request.POST.get("to_user_id")
@@ -50,6 +52,7 @@ def SendMessages(request):
         return HttpResponseBadRequest()
 
 
+@login_required(login_url="login")
 def LoadMore(request):
     user = request.user
     if is_ajax(request):
@@ -83,6 +86,7 @@ def LoadMore(request):
             return JsonResponse({'empty': True}, safe=False)
 
 
+@login_required(login_url="login")
 def Directs(request, pk):
     user = request.user
     messages = Message.get_message(user=request.user)
@@ -107,5 +111,6 @@ def Directs(request, pk):
     return render(request, 'messages/directs.html', context)
 
 
+@login_required(login_url="login")
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'

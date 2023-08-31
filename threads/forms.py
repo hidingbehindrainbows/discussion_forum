@@ -1,5 +1,7 @@
 from django import forms
 from .models import Comment, Category, Thread
+import datetime
+now = datetime.datetime.now()
 
 
 # class
@@ -12,6 +14,9 @@ class CommentForm(forms.ModelForm):  # with Meta we're overriding the Comment mo
 
 choices = Category.objects.all().values_list("name", "name")
 choice_list = [item for item in choices]
+sortingOptions1 = {"New", "Top", }
+sortingOptions2 = {"allTime", "pastYear",
+                   "pastMonth", "past24"}
 
 
 class ThreadForm(forms.ModelForm):

@@ -29,7 +29,7 @@
     <div class="card" style="border:none;background: var(--bg-color);">
       {% comment %} <div class="card" style="background-color: rgb(162, 150, 132)"> {% endcomment %}
           <div class="card-body text-center fs-4 ">
-              <a class="text-decoration-none" style="color: rgb(252, 154, 138)" href="{% url 'category' 'Site-News!' %}">Site News!</a>
+              <a class="text-decoration-none" style="color: rgb(252, 154, 138)" href="{% url 'sortCategory' 'Site-News!' 'New' 'allTime' %}">Site News!</a>
           </div>
         </div><hr style="background-color:white">
         <div class="card" style="border:none;background: var(--bg-color);">
@@ -44,22 +44,22 @@
         </div><hr style="background-color:white">
         <div class="card" style="border:none;background: var(--bg-color);">
           <div class="card-body text-center fs-4">
-              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'category' 'General' %}">General</a>
+              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'sortCategory' 'General' 'New' 'allTime' %}">General</a>
           </div>
         </div><hr style="background-color:white">
         <div class="card" style="border:none;background: var(--bg-color);">
           <div class="card-body text-center fs-4">
-              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'category' cats="Web-Development" %}">Web Development</a>
+              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'sortCategory' 'Web-Development' 'New' 'allTime' %}">Web Development</a>
           </div>
         </div><hr style="background-color:white">
         <div class="card" style="border:none;background: var(--bg-color);">
           <div class="card-body text-center fs-4">
-              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'category' 'App-Development' %}">App Development</a>
+              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'sortCategory' 'App-Development' 'New' 'allTime' %}">App Development</a>
           </div>
         </div><hr style="background-color:white">
         <div class="card" style="border:none;background: var(--bg-color);">
           <div class="card-body text-center fs-4">
-              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'category' 'Coding' %}">Coding</a>
+              <a class="text-decoration-none" style="color:rgb(252, 154, 138)" href="{% url 'sortCategory' 'Coding' 'New' 'allTime' %}">Coding</a>
           </div>
         </div><hr style="background-color:white">
         <div class="card" style="border:none;background: var(--bg-color);">

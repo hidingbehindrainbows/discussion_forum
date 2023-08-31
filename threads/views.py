@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, FormView, View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy, reverse
-from .forms import CommentForm, ThreadForm
+from .forms import CommentForm, ThreadForm, sortingOptions1, sortingOptions2, now
 from .models import Thread, Likes, Dislikes, Category, WatchThread, Comment
 from django.shortcuts import redirect, render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -172,17 +172,45 @@ def dislike_thread(request):
         return HttpResponseRedirect(reverse_lazy("thread_detail", kwargs={"pk": thread_id}))
 
 
+# @login_required(login_url="login")
+# def CategoryView(request, cats):
+#     choices = Category.objects.all().values_list("name")
+#     all_cats = [item for items in choices for item in items]
+#     cats = cats.replace("-", " ")
+#     if cats in all_cats:
+#         p = Paginator(Thread.objects.filter(
+#             category=cats), 5)  # TODO changable
+#         page = request.GET.get("page")
+#         cat_thread = p.get_page(page)
+#         return render(request, "categories.html", {"cats": cats, "cat_threads": cat_thread})
+#     return redirect("home")
+
+
 @login_required(login_url="login")
-def CategoryView(request, cats):
+def SortedCategoryView(request, cats, whatSort1="New", whatSort2="allTime"):
+    # if whatSort1 == "New" and whatSort2 == "allTime":
+    #     return CategoryView(request, cats)
     choices = Category.objects.all().values_list("name")
     all_cats = [item for items in choices for item in items]
     cats = cats.replace("-", " ")
-    if cats in all_cats:
-        p = Paginator(Thread.objects.filter(
-            category=cats), 5)  # TODO changable
+    if cats in all_cats and whatSort1 in sortingOptions1 and whatSort2 in sortingOptions2:
+        p = Thread.objects.filter(
+            category=cats)
+        if whatSort1 == "Top":
+            p = p.annotate(
+                like_count=(Count('liked'))).order_by('-like_count')
+
+        if whatSort2 == "pastYear":
+            p = p.filter(date__year__gt=now.year-1)  # greater than gt
+        elif whatSort2 == "pastMonth":
+            p = p.filter(date__month__gt=now.month-1)  # greater than gt
+        elif whatSort2 == "past24":
+            p = p.filter(date__day__gte=now.day - 1)  # greater than gt
+
         page = request.GET.get("page")
+        p = Paginator(p, 5)
         cat_thread = p.get_page(page)
-        return render(request, "categories.html", {"cats": cats, "cat_threads": cat_thread})
+        return render(request, "categories.html", {"cats": cats, "cat_threads": cat_thread, "sw1": whatSort1, "sw2": whatSort2})
     return redirect("home")
 
 
