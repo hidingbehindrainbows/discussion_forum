@@ -8,8 +8,9 @@ body {
         linear-gradient(to left top, rgb(252, 154, 138) 20%/*bottom-right color*/,  rgb(237, 189, 175) 75% /*top-left color*/),
         linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))/*"faked" black background make sure to add last or it will appear before the transparent/colored layer*/;
 
-    /* background-color: rgb(54, 134, 109); */
-    background-repeat: no-repeat;
+
+    background-color: rgb(54, 134, 109);
+    /* background-repeat: no-repeat; */
     background-attachment: fixed;
     overflow: auto;
     /* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, .15)), to(rgba(0, 0, 0, .25))), -webkit-gradient(linear, left top, right bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.5, rgba(255, 255, 255, .1)), color-stop(0.501, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0)));
