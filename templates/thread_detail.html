@@ -83,6 +83,6 @@
     </form>
 </div>
 <p>
-    Do you want to go back to <a href="{% url 'category' object.category%}">{{object.category}}</a>
+    Do you want to go back to <a href="{% url 'sortCategory' object.category 'New' 'allTime'%}">{{object.category}}</a>
 </p>
 {% endblock content %}
