@@ -58,7 +58,7 @@ class Thread(models.Model):  # model for our threads feature
 
 class Comment(models.Model):  # the model for our comments section
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=140)
+    comment = models.CharField(max_length=5000)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
