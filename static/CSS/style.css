@@ -9,7 +9,7 @@ body {
         linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))/*"faked" black background make sure to add last or it will appear before the transparent/colored layer*/;
 
 
-    background-color: rgb(54, 134, 109);
+    /* background-color: rgb(54, 134, 109); */
     /* background-repeat: no-repeat; */
     background-attachment: fixed;
     overflow: auto;
